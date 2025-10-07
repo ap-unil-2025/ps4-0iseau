@@ -23,7 +23,12 @@ def create_contact(name, phone, email=""):
     """
     # TODO: Implement this function
     # Return a dictionary with the contact information
-    pass
+    dict = {
+        'name': name,
+        'phone': phone,
+        'email': email
+    }
+    return dict
 
 
 def add_contact(contacts, name, phone, email=""):
@@ -51,7 +56,8 @@ def add_contact(contacts, name, phone, email=""):
     # 1. Create a contact using create_contact()
     # 2. Add it to the contacts list
     # 3. Return the contact
-    pass
+    contacts.append(create_contact(name, phone, email))
+    return contacts
 
 
 def find_contact_by_name(contacts, name):
@@ -73,7 +79,10 @@ def find_contact_by_name(contacts, name):
     # TODO: Implement this function
     # Loop through contacts and compare names (case-insensitive)
     # Hint: Use .lower() for case-insensitive comparison
-    pass
+    for i in contacts:
+        if i['name'].lower() == name.lower():
+            return i
+        else: return None
 
 
 def search_contacts(contacts, search_term):
