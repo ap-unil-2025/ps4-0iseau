@@ -21,7 +21,12 @@ def create_number_list(start, end):
     """
     # TODO: Implement this function
     # Hint: Use range() and convert to list
-    pass
+    list = []
+    for i in range(start, end + 1):
+        list.append(i)
+
+    print(type(list)) #No need to convert as range serves as an iterable, I still return a list
+    return list
 
 
 def filter_even_numbers(numbers):
@@ -40,7 +45,9 @@ def filter_even_numbers(numbers):
     """
     # TODO: Implement this function
     # You can use a loop or list comprehension
-    pass
+    even_numbers = [n for n in numbers if n%2 == 0]
+    return even_numbers
+    
 
 
 def square_numbers(numbers):
@@ -59,7 +66,8 @@ def square_numbers(numbers):
     """
     # TODO: Implement this function
     # Hint: Try a list comprehension!
-    pass
+    squared = [n**2 for n in numbers]
+    return squared
 
 
 def find_max_min(numbers):
@@ -78,7 +86,10 @@ def find_max_min(numbers):
     """
     # TODO: Implement this function
     # You can use max() and min() built-in functions
-    pass
+    max_value = max(numbers)
+    min_value = min(numbers)
+    tuple = (max_value, min_value)
+    return tuple
 
 
 def remove_duplicates(items):
@@ -98,7 +109,11 @@ def remove_duplicates(items):
     # TODO: Implement this function
     # Hint: You can use a loop and check if item is already in result list
     # Or convert to set and back to list (but this doesn't preserve order)
-    pass
+    list = []
+    for i in items :
+        if i not in list:
+            list.append(i)
+    return list
 
 
 def merge_lists(list1, list2):
@@ -121,7 +136,18 @@ def merge_lists(list1, list2):
     """
     # TODO: Implement this function
     # Hint: Use a loop with index, handle different lengths
-    pass
+    merge_lists = []
+    print(type(merge_lists))
+    iter = list(range(0, (len(list1) + len(list2))) )
+    print(iter)
+    for i in iter :
+        if i < len(list1):
+            merge_lists.append(list1[i])
+        if i < len(list2):
+            merge_lists.append(list2[i])
+    return merge_lists
+
+        
 
 
 def list_statistics(numbers):
@@ -143,7 +169,14 @@ def list_statistics(numbers):
 
     # TODO: Implement this function
     # Calculate and return a dictionary with the statistics
-    pass
+    dict = {
+        'sum': sum(numbers),
+        'average': sum(numbers) / len(numbers),
+        'count': len(numbers),
+        'max': max(numbers),
+        'min': min(numbers)
+    }
+    return dict
 
 
 def chunk_list(items, chunk_size):
@@ -163,7 +196,13 @@ def chunk_list(items, chunk_size):
     """
     # TODO: Implement this function
     # Hint: Use list slicing in a loop
-    pass
+    chunks = []
+    
+    for i in range(0, len(items), chunk_size):
+        chunk = items[i:i+chunk_size]
+        chunks.append(chunk)
+    return chunks
+        
 
 
 # Test cases
@@ -176,42 +215,42 @@ if __name__ == "__main__":
     result = create_number_list(1, 5)
     print(f"Result: {result}")
     assert result == [1, 2, 3, 4, 5], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test filter_even_numbers
     print("Test 2: filter_even_numbers([1, 2, 3, 4, 5, 6])")
     result = filter_even_numbers([1, 2, 3, 4, 5, 6])
     print(f"Result: {result}")
     assert result == [2, 4, 6], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test square_numbers
     print("Test 3: square_numbers([1, 2, 3, 4])")
     result = square_numbers([1, 2, 3, 4])
     print(f"Result: {result}")
     assert result == [1, 4, 9, 16], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test find_max_min
     print("Test 4: find_max_min([3, 1, 4, 1, 5, 9, 2, 6])")
     result = find_max_min([3, 1, 4, 1, 5, 9, 2, 6])
     print(f"Result: {result}")
     assert result == (9, 1), "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test remove_duplicates
     print("Test 5: remove_duplicates([1, 2, 2, 3, 4, 3, 5])")
     result = remove_duplicates([1, 2, 2, 3, 4, 3, 5])
     print(f"Result: {result}")
     assert result == [1, 2, 3, 4, 5], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test merge_lists
     print("Test 6: merge_lists([1, 3, 5], [2, 4, 6])")
     result = merge_lists([1, 3, 5], [2, 4, 6])
     print(f"Result: {result}")
     assert result == [1, 2, 3, 4, 5, 6], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test list_statistics
     print("Test 7: list_statistics([1, 2, 3, 4, 5])")
@@ -219,14 +258,14 @@ if __name__ == "__main__":
     print(f"Result: {result}")
     expected = {'sum': 15, 'average': 3.0, 'count': 5, 'max': 5, 'min': 1}
     assert result == expected, "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test chunk_list
     print("Test 8: chunk_list([1, 2, 3, 4, 5, 6, 7], 3)")
     result = chunk_list([1, 2, 3, 4, 5, 6, 7], 3)
     print(f"Result: {result}")
     assert result == [[1, 2, 3], [4, 5, 6], [7]], "Failed!"
-    print("✓ Passed\n")
+    print("Passed\n")
 
     print("=" * 50)
     print("All tests passed! Great work!")
