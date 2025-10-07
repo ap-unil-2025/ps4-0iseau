@@ -3,7 +3,6 @@ Problem 2: Dictionary Operations and Nested Structures
 Practice working with Python dictionaries - creating, accessing, modifying, and nesting them.
 """
 
-
 def create_student_record(name, age, major, gpa):
     """
     Create a student record as a dictionary.
@@ -23,7 +22,13 @@ def create_student_record(name, age, major, gpa):
     """
     # TODO: Implement this function
     # Return a dictionary with the provided information
-    pass
+    dict = {
+        'name': name,
+        'age': age,
+        'major': major,
+        'gpa': gpa
+    }
+    return dict
 
 
 def get_value_safely(dictionary, key, default=None):
@@ -47,7 +52,7 @@ def get_value_safely(dictionary, key, default=None):
     """
     # TODO: Implement this function
     # Hint: Use the .get() method or check if key in dictionary
-    pass
+    return dictionary.get(key, default)
 
 
 def merge_dictionaries(dict1, dict2):
@@ -67,7 +72,9 @@ def merge_dictionaries(dict1, dict2):
     """
     # TODO: Implement this function
     # Create a new dictionary with items from both
-    pass
+    merge_dictionaries = dict1.copy() #start w dict 1
+    merge_dictionaries.update(dict2) # update w dict 2 o(rewrites if already exists)
+    return merge_dictionaries
 
 
 def count_word_frequency(text):
@@ -91,7 +98,21 @@ def count_word_frequency(text):
     # 2. Remove punctuation (you can use .replace() or import string)
     # 3. Split into words
     # 4. Count each word's frequency
-    pass
+    import string
+    text = text.lower()
+    for char in string.punctuation:
+        text = text.replace(char, "")
+    
+    words = text.split()
+    frequency = {}
+    for i in words:
+        if i in frequency :
+            frequency[i] += 1
+        else :
+            frequency[i] = 1
+    return frequency
+    
+
 
 
 def invert_dictionary(dictionary):
@@ -111,7 +132,10 @@ def invert_dictionary(dictionary):
     """
     # TODO: Implement this function
     # Create a new dictionary with values as keys and keys as values
-    pass
+    invert_dictionary = {}
+    for i in dictionary :
+        invert_dictionary[dictionary[i]] = i
+    return invert_dictionary
 
 
 def filter_dictionary(dictionary, keys_to_keep):
@@ -131,7 +155,12 @@ def filter_dictionary(dictionary, keys_to_keep):
     """
     # TODO: Implement this function
     # Loop through keys_to_keep and add them to result if they exist
-    pass
+    filtered_dictionary = {}
+    for i in keys_to_keep :
+        if i in dictionary :
+            filtered_dictionary[i] = dictionary[i]
+    return filtered_dictionary
+            
 
 
 def group_by_first_letter(words):
@@ -153,7 +182,14 @@ def group_by_first_letter(words):
     #   - Get first letter
     #   - Add word to the list for that letter
     # Hint: Use .setdefault() or check if key exists
-    pass
+    dict = {}
+    for i in words :
+        first_letter = i[0]
+        if first_letter in dict :
+            dict[first_letter].append(i)
+        else :
+            dict[first_letter] = [i]
+    return dict
 
 
 def calculate_grades_average(students):
@@ -178,7 +214,11 @@ def calculate_grades_average(students):
     # TODO: Implement this function
     # For each student, calculate average of their grades
     # Hint: sum(grades) / len(grades)
-    pass
+    dict = {}
+    for i in students :
+        average = sum(students[i]) / len(students[i])
+        dict[i] = round(average, 2)
+    return dict
 
 
 def nested_dict_access(data, keys):
@@ -203,7 +243,14 @@ def nested_dict_access(data, keys):
     # TODO: Implement this function
     # Start with data, then traverse using each key
     # Return None if any key is missing
-    pass
+    value = None
+    current_path = data
+    for i in keys :
+        if i in current_path :
+            current_path = current_path[i]
+        else : return None
+    return current_path
+
 
 
 # Test cases
@@ -216,49 +263,49 @@ if __name__ == "__main__":
     result = create_student_record("Alice", 20, "CS", 3.8)
     print(f"Result: {result}")
     assert result == {'name': 'Alice', 'age': 20, 'major': 'CS', 'gpa': 3.8}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test get_value_safely
     print("Test 2: get_value_safely")
     d = {'a': 1, 'b': 2}
     assert get_value_safely(d, 'a') == 1
     assert get_value_safely(d, 'c', 'Not found') == 'Not found'
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test merge_dictionaries
     print("Test 3: merge_dictionaries")
     result = merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4})
     print(f"Result: {result}")
     assert result == {'a': 1, 'b': 3, 'c': 4}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test count_word_frequency
     print("Test 4: count_word_frequency")
     result = count_word_frequency("hello world hello")
     print(f"Result: {result}")
     assert result == {'hello': 2, 'world': 1}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test invert_dictionary
     print("Test 5: invert_dictionary")
     result = invert_dictionary({'a': 1, 'b': 2, 'c': 3})
     print(f"Result: {result}")
     assert result == {1: 'a', 2: 'b', 3: 'c'}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test filter_dictionary
     print("Test 6: filter_dictionary")
     result = filter_dictionary({'a': 1, 'b': 2, 'c': 3, 'd': 4}, ['a', 'c'])
     print(f"Result: {result}")
     assert result == {'a': 1, 'c': 3}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test group_by_first_letter
     print("Test 7: group_by_first_letter")
     result = group_by_first_letter(['apple', 'banana', 'apricot', 'blueberry'])
     print(f"Result: {result}")
     assert result == {'a': ['apple', 'apricot'], 'b': ['banana', 'blueberry']}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test calculate_grades_average
     print("Test 8: calculate_grades_average")
@@ -268,14 +315,14 @@ if __name__ == "__main__":
     })
     print(f"Result: {result}")
     assert result == {'Alice': 87.67, 'Bob': 77.67}
-    print("✓ Passed\n")
+    print("Passed\n")
 
     # Test nested_dict_access
     print("Test 9: nested_dict_access")
     data = {'a': {'b': {'c': 123}}}
     assert nested_dict_access(data, ['a', 'b', 'c']) == 123
     assert nested_dict_access(data, ['a', 'x']) is None
-    print("✓ Passed\n")
+    print("Passed\n")
 
     print("=" * 50)
     print("All tests passed! Excellent work!")
