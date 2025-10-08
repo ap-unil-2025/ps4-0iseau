@@ -108,7 +108,11 @@ def search_contacts(contacts, search_term):
     # Find contacts where search_term appears in name OR phone
     # Use .lower() for case-insensitive search
     # Hint: Use 'in' operator to check if search_term is in the string
-    pass
+    list = []
+    for i in contacts:
+        if search_term.lower() in i['name'].lower() or search_term in i['phone']:
+            list.append(i)
+    return list
 
 
 def delete_contact(contacts, name):
@@ -133,7 +137,12 @@ def delete_contact(contacts, name):
     # Find the contact and remove it from the list
     # Return True if found and deleted, False otherwise
     # Hint: Use enumerate() to get index, then use .pop() to remove
-    pass
+    for i in enumerate(contacts):
+        print(i)
+        if i[1]['name'].lower() == name.lower():
+            contacts.pop(i[0])
+            return True
+        if i == len(contacts)+1 : return False
 
 
 def count_contacts_with_email(contacts):
@@ -156,7 +165,11 @@ def count_contacts_with_email(contacts):
     """
     # TODO: Implement this function
     # Count contacts where email is not empty
-    pass
+    count = 0
+    for i in contacts:
+        if i['email'] != "":
+            count += 1
+    return count
 
 
 def get_all_phone_numbers(contacts):
@@ -180,7 +193,8 @@ def get_all_phone_numbers(contacts):
     # TODO: Implement this function
     # Extract phone number from each contact
     # Hint: Use list comprehension or a loop
-    pass
+    numbers = [contacts[i]['phone'] for i in range(len(contacts))]
+    return numbers
 
 
 def sort_contacts_by_name(contacts):
@@ -205,7 +219,8 @@ def sort_contacts_by_name(contacts):
     # TODO: Implement this function
     # Use sorted() with a key function
     # Hint: sorted(contacts, key=lambda c: c['name'])
-    pass
+    list = sorted(contacts, key=lambda c: c['name'])
+    return list
 
 
 def contact_exists(contacts, name):
@@ -221,7 +236,11 @@ def contact_exists(contacts, name):
     """
     # TODO: Implement this function
     # Use find_contact_by_name and check if result is not None
-    pass
+    if find_contact_by_name(contacts, name) is None:
+        return False
+    else :
+        return True
+    
 
 
 # Test cases
