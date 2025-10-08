@@ -1,8 +1,8 @@
 # Problem Set 4: Lists, Dictionaries, Functions & Imports
 
 ## Student Information
-Name: Al Fallouji
-Date: 07/10/25
+Name: Al Fallouji Danny
+Date: 08/10/25
 
 ## Assignment Overview
 This assignment focuses on working with Python data structures (lists and dictionaries), writing functions, using imports, and exploring basic recursion.
